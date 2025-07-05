@@ -2,7 +2,7 @@
 import { Task, TaskFilter } from "@/pages/Dashboard";
 import { TaskCard } from "./TaskCard";
 import { useMemo } from "react";
-import { Search } from "lucide-react";
+import { Search, Sparkles, Target, Zap } from "lucide-react";
 
 interface TaskListProps {
   tasks: Task[];
@@ -48,32 +48,51 @@ export const TaskList = ({ tasks, filters, onTaskUpdate, onTaskDelete }: TaskLis
 
   if (filteredTasks.length === 0) {
     return (
-      <div className="text-center py-16">
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-12 max-w-md mx-auto">
-          <Search className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-600 text-xl font-medium mb-2">No tasks found</p>
-          <p className="text-gray-500 text-sm">
-            {tasks.length === 0 ? "Create your first task to get started!" : "Try adjusting your filters"}
-          </p>
+      <div className="text-center py-20 animate-fade-in">
+        <div className="glass-morphism rounded-3xl p-16 max-w-lg mx-auto relative overflow-hidden">
+          {/* Floating decorative elements */}
+          <div className="absolute top-4 left-4 w-6 h-6 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-30 animate-float"></div>
+          <div className="absolute top-8 right-6 w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-40 animate-float" style={{animationDelay: '1s'}}></div>
+          <div className="absolute bottom-6 left-8 w-5 h-5 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full opacity-35 animate-bounce-slow"></div>
+          
+          <div className="relative z-10">
+            <div className="w-24 h-24 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-full mx-auto mb-6 flex items-center justify-center animate-glow">
+              <Search className="h-12 w-12 text-white animate-bounce-slow" />
+            </div>
+            <h3 className="text-gradient text-2xl font-bold mb-4">No Tasks Found</h3>
+            <p className="text-gray-600 text-lg font-medium mb-2">
+              {tasks.length === 0 ? "Ready to create your first magical task?" : "Try adjusting your smart filters"}
+            </p>
+            <div className="flex justify-center space-x-2 mt-6">
+              <Sparkles className="h-5 w-5 text-purple-500 animate-bounce-slow" />
+              <Target className="h-5 w-5 text-pink-500 animate-bounce-slow" style={{animationDelay: '0.5s'}} />
+              <Zap className="h-5 w-5 text-blue-500 animate-bounce-slow" style={{animationDelay: '1s'}} />
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          Tasks ({filteredTasks.length})
-        </h2>
+        <div className="flex items-center space-x-4">
+          <h2 className="text-3xl font-bold text-gradient animate-shimmer">
+            Your Tasks
+          </h2>
+          <div className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-white px-4 py-2 rounded-full font-bold text-sm animate-bounce-slow shadow-lg">
+            {filteredTasks.length} {filteredTasks.length === 1 ? 'task' : 'tasks'}
+          </div>
+        </div>
       </div>
       
-      <div className="grid gap-6">
+      <div className="grid gap-8">
         {filteredTasks.map((task, index) => (
           <div
             key={task.id}
-            className="animate-fade-in"
-            style={{ animationDelay: `${index * 100}ms` }}
+            className="animate-fade-in hover-lift"
+            style={{ animationDelay: `${index * 150}ms` }}
           >
             <TaskCard
               task={task}

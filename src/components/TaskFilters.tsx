@@ -3,7 +3,7 @@ import { TaskFilter } from "@/pages/Dashboard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Filter } from "lucide-react";
+import { Filter, Sparkles } from "lucide-react";
 
 interface TaskFiltersProps {
   filters: TaskFilter;
@@ -19,52 +19,75 @@ export const TaskFilters = ({ filters, onFiltersChange }: TaskFiltersProps) => {
   };
 
   return (
-    <Card className="bg-white/80 backdrop-blur-sm border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-lg flex items-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          <Filter className="mr-2 h-5 w-5 text-blue-600" />
-          Filters
+    <Card className="glass-morphism border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 hover-lift backdrop-blur-xl relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-purple-400/20 to-transparent rounded-bl-full"></div>
+      <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-pink-400/20 to-transparent rounded-tr-full"></div>
+      
+      <CardHeader className="pb-4 relative z-10">
+        <CardTitle className="text-xl flex items-center text-gradient font-bold">
+          <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mr-3 animate-float">
+            <Filter className="h-4 w-4 text-white" />
+          </div>
+          Smart Filters
+          <Sparkles className="ml-2 h-5 w-5 text-purple-500 animate-bounce-slow" />
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="space-y-2">
-          <Label htmlFor="status-filter" className="text-sm font-medium text-gray-700">Status</Label>
+      <CardContent className="space-y-8 relative z-10">
+        <div className="space-y-3 group">
+          <Label htmlFor="status-filter" className="text-sm font-bold text-gray-700 uppercase tracking-wide flex items-center">
+            <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mr-2 animate-pulse"></div>
+            Status
+          </Label>
           <Select value={filters.status || 'all'} onValueChange={(value) => updateFilter('status', value)}>
-            <SelectTrigger className="bg-white border-gray-200 hover:border-blue-300 transition-colors duration-200">
+            <SelectTrigger className="glass-morphism border-white/20 hover:border-purple-300 transition-all duration-300 hover:shadow-lg backdrop-blur-sm text-gray-700 font-medium">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-white/95 backdrop-blur-sm border-gray-200 shadow-xl">
-              <SelectItem value="all" className="hover:bg-blue-50">All Status</SelectItem>
-              <SelectItem value="todo" className="hover:bg-gray-50">To Do</SelectItem>
-              <SelectItem value="in-progress" className="hover:bg-blue-50">In Progress</SelectItem>
-              <SelectItem value="completed" className="hover:bg-green-50">Completed</SelectItem>
+            <SelectContent className="glass-morphism border-white/20 shadow-2xl backdrop-blur-xl">
+              <SelectItem value="all" className="hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-200 cursor-pointer">
+                🌟 All Status
+              </SelectItem>
+              <SelectItem value="todo" className="hover:bg-gradient-to-r hover:from-gray-50 hover:to-slate-50 transition-all duration-200 cursor-pointer">
+                📋 To Do
+              </SelectItem>
+              <SelectItem value="in-progress" className="hover:bg-gradient-to-r hover:from-blue-50 hover:to-cyan-50 transition-all duration-200 cursor-pointer">
+                ⚡ In Progress
+              </SelectItem>
+              <SelectItem value="completed" className="hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 transition-all duration-200 cursor-pointer">
+                ✅ Completed
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="priority-filter" className="text-sm font-medium text-gray-700">Priority</Label>
+        <div className="space-y-3 group">
+          <Label htmlFor="priority-filter" className="text-sm font-bold text-gray-700 uppercase tracking-wide flex items-center">
+            <div className="w-2 h-2 bg-gradient-to-r from-red-500 to-pink-500 rounded-full mr-2 animate-pulse" style={{animationDelay: '0.5s'}}></div>
+            Priority
+          </Label>
           <Select value={filters.priority || 'all'} onValueChange={(value) => updateFilter('priority', value)}>
-            <SelectTrigger className="bg-white border-gray-200 hover:border-blue-300 transition-colors duration-200">
+            <SelectTrigger className="glass-morphism border-white/20 hover:border-purple-300 transition-all duration-300 hover:shadow-lg backdrop-blur-sm text-gray-700 font-medium">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-white/95 backdrop-blur-sm border-gray-200 shadow-xl">
-              <SelectItem value="all" className="hover:bg-blue-50">All Priorities</SelectItem>
-              <SelectItem value="high" className="hover:bg-red-50">
-                <span className="flex items-center">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
+            <SelectContent className="glass-morphism border-white/20 shadow-2xl backdrop-blur-xl">
+              <SelectItem value="all" className="hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-200 cursor-pointer">
+                🎯 All Priorities
+              </SelectItem>
+              <SelectItem value="high" className="hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 transition-all duration-200 cursor-pointer">
+                <span className="flex items-center font-semibold text-red-600">
+                  🔥 <div className="w-3 h-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-full mr-2 ml-1 animate-glow"></div>
                   High
                 </span>
               </SelectItem>
-              <SelectItem value="medium" className="hover:bg-yellow-50">
-                <span className="flex items-center">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+              <SelectItem value="medium" className="hover:bg-gradient-to-r hover:from-yellow-50 hover:to-orange-50 transition-all duration-200 cursor-pointer">
+                <span className="flex items-center font-semibold text-orange-600">
+                  ⚡ <div className="w-3 h-3 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full mr-2 ml-1"></div>
                   Medium
                 </span>
               </SelectItem>
-              <SelectItem value="low" className="hover:bg-green-50">
-                <span className="flex items-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+              <SelectItem value="low" className="hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 transition-all duration-200 cursor-pointer">
+                <span className="flex items-center font-semibold text-green-600">
+                  🌟 <div className="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mr-2 ml-1"></div>
                   Low
                 </span>
               </SelectItem>
@@ -72,17 +95,28 @@ export const TaskFilters = ({ filters, onFiltersChange }: TaskFiltersProps) => {
           </Select>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="due-filter" className="text-sm font-medium text-gray-700">Due Date</Label>
+        <div className="space-y-3 group">
+          <Label htmlFor="due-filter" className="text-sm font-bold text-gray-700 uppercase tracking-wide flex items-center">
+            <div className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mr-2 animate-pulse" style={{animationDelay: '1s'}}></div>
+            Due Date
+          </Label>
           <Select value={filters.dueFilter || 'all'} onValueChange={(value) => updateFilter('dueFilter', value)}>
-            <SelectTrigger className="bg-white border-gray-200 hover:border-blue-300 transition-colors duration-200">
+            <SelectTrigger className="glass-morphism border-white/20 hover:border-purple-300 transition-all duration-300 hover:shadow-lg backdrop-blur-sm text-gray-700 font-medium">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-white/95 backdrop-blur-sm border-gray-200 shadow-xl">
-              <SelectItem value="all" className="hover:bg-blue-50">All Tasks</SelectItem>
-              <SelectItem value="today" className="hover:bg-blue-50">Due Today</SelectItem>
-              <SelectItem value="overdue" className="hover:bg-red-50">Overdue</SelectItem>
-              <SelectItem value="upcoming" className="hover:bg-green-50">Upcoming</SelectItem>
+            <SelectContent className="glass-morphism border-white/20 shadow-2xl backdrop-blur-xl">
+              <SelectItem value="all" className="hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-200 cursor-pointer">
+                📅 All Tasks
+              </SelectItem>
+              <SelectItem value="today" className="hover:bg-gradient-to-r hover:from-blue-50 hover:to-cyan-50 transition-all duration-200 cursor-pointer">
+                🎯 Due Today
+              </SelectItem>
+              <SelectItem value="overdue" className="hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 transition-all duration-200 cursor-pointer">
+                ⚠️ Overdue
+              </SelectItem>
+              <SelectItem value="upcoming" className="hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 transition-all duration-200 cursor-pointer">
+                🚀 Upcoming
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
