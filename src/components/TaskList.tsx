@@ -2,6 +2,7 @@
 import { Task, TaskFilter } from "@/pages/Dashboard";
 import { TaskCard } from "./TaskCard";
 import { useMemo } from "react";
+import { Search } from "lucide-react";
 
 interface TaskListProps {
   tasks: Task[];
@@ -47,31 +48,39 @@ export const TaskList = ({ tasks, filters, onTaskUpdate, onTaskDelete }: TaskLis
 
   if (filteredTasks.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-muted-foreground text-lg">No tasks found</p>
-        <p className="text-muted-foreground text-sm mt-2">
-          {tasks.length === 0 ? "Create your first task to get started!" : "Try adjusting your filters"}
-        </p>
+      <div className="text-center py-16">
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-12 max-w-md mx-auto">
+          <Search className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+          <p className="text-gray-600 text-xl font-medium mb-2">No tasks found</p>
+          <p className="text-gray-500 text-sm">
+            {tasks.length === 0 ? "Create your first task to get started!" : "Try adjusting your filters"}
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-lg font-semibold">
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Tasks ({filteredTasks.length})
         </h2>
       </div>
       
-      <div className="grid gap-4">
-        {filteredTasks.map(task => (
-          <TaskCard
+      <div className="grid gap-6">
+        {filteredTasks.map((task, index) => (
+          <div
             key={task.id}
-            task={task}
-            onUpdate={onTaskUpdate}
-            onDelete={onTaskDelete}
-          />
+            className="animate-fade-in"
+            style={{ animationDelay: `${index * 100}ms` }}
+          >
+            <TaskCard
+              task={task}
+              onUpdate={onTaskUpdate}
+              onDelete={onTaskDelete}
+            />
+          </div>
         ))}
       </div>
     </div>
